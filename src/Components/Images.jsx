@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import 'aos/dist/aos.css';
+import { Skeleton } from 'antd';
 
 const App = () => {
   const [searchImg, setSearcImg] = useState("");
@@ -32,7 +33,14 @@ const App = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    getImages();
+    if (searchImg.length < 1) {
+      alert("please enter something to search")
+    }
+    else {
+      getImages();
+    }
+
+    setSearcImg("")
   };
 
   return (
@@ -50,6 +58,7 @@ const App = () => {
           <button type="submit" className="btn">Search images</button>
         </form>
         <br />
+
         <div className="img1">
           {
             img.map((ele, i) => {
@@ -57,7 +66,7 @@ const App = () => {
                 <div className="pt-4" key={i}
                   data-aos="flip-up"
                 >
-                  <img className="img" src={ele.urls.small} />
+                  {ele ? <img className="img" src={ele.urls.small} /> : <Skeleton />}
                 </div>
               )
             })
