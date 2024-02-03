@@ -1,17 +1,22 @@
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import './App.css'
 import Images from "./Components/Images"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    AOS.init({
+    });
+  }, []);
 
   return (
     <div className="App">
-<Images/>
+      <Images />
 
-      </div>
-      
+    </div>
+
   )
 }
 
